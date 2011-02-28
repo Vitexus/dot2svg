@@ -1,0 +1,7 @@
+digraph G {
+  node [
+    shape="box"
+    style="filled"
+  ]
+  Hello->World [label="to"]
+}

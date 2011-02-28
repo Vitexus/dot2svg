@@ -1,0 +1,8 @@
+include dot2svn/*.py
+include dot2svn/batik/*
+include CHANGELOG.txt
+include TODO.txt
+include setup.py
+include ez_setup.py
+exclude .svn
+prune .svn

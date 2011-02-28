@@ -1,0 +1,25 @@
+Metadata-Version: 1.0
+Name: dot2svg
+Version: 0.1.0
+Summary: Convert a dot file into a prettier SVG or PNG.
+Home-page: http://code.google.com/dot2svg/
+Author: Scott Kirkwood
+Author-email: scottakirkwood@gmail.com
+License: GNU GPL 3
+Download-URL: http://dot2svg.googlecode.com/files/dot2svg-0.1.0.zip
+Description: Converts a .dot file into an SVN and/or a PNG file.
+        Pretties up the image by adding shadows.
+Keywords: dot,svg,png,diagram,Python
+Platform: POSIX
+Platform: Windows
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Topic :: Documentation
+Classifier: Topic :: Utilities

@@ -1,0 +1,3 @@
+#!python
+import dot2svg.dot2svg
+dot2svg.dot2svg.parse_command_line()

@@ -1,0 +1,10 @@
+Version 0.1 (2007-12-07)
+------------------------
+Initial release
+
+Version 0.2 (2008-09-28)
+------------------------
+Fixed bug where some rectangles weren't found
+Improved the unit tests
+Add command line parameters for shadow and rounded rectangles.
+Make it optional to output png
