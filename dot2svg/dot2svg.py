@@ -129,7 +129,7 @@ def AddArrowShadows(text, shadow='(2, 2)'):
   shadow = StrToTuple(shadow)
   if shadow == None:
     return text
-  
+
   def RepFun(match):
     (params,) = match.groups()
     m = re.match(r'style=".*?(stroke-dasharray:.*?);',params)
@@ -149,12 +149,12 @@ def AddArrowShadows(text, shadow='(2, 2)'):
   return text
 
 def PreserveWhitespace(text):
-  """ 
+  """
   Get something that looks like
   <text .*>
   and add xml:space='preserve' to it
   """
-  
+
   def RepFun(match):
     (params,) = match.groups()
     ret = '<text %s xml:space=\"preserve\">' % (params)
@@ -171,20 +171,20 @@ def CleanupOuput(text, shadow, rounded):
   text = FixFont(text)
   text = PolygonToRect(text, rounded)
   text = AddShadows(text, shadow)
-  text = AddArrowShadows(text)
+  text = AddArrowShadows(text, shadow)
   text = PreserveWhitespace(text)
-  
+
   return text
-  
+
 def ConvertDot2Svg(filename, shadow, rounded):
   """ Given a DOT filename create an SVG file from it.
-  
+
   Args:
     filename: Filename, must end in .dot, full path not required
   """
   if not filename.endswith('.dot'):
     raise "Filename must end with .dot (%s)" % (filename)
-  
+
   dotCmd = subprocess.Popen(['dot',
     '-Tsvg', # Output as SVG
     filename], stdout=subprocess.PIPE)
@@ -193,15 +193,15 @@ def ConvertDot2Svg(filename, shadow, rounded):
   output = CleanupOuput(output, shadow, rounded)
   open(svg_file, "w").write(output)
   return svg_file
-  
+
 def ConvertSvg2Png(filename):
   """ Given an SVG file, convert it to PNG using batik and java.
   """
   if not filename.endswith('.svg'):
     raise "Filename must end with .svg (%s)" % (filename)
-  
+
   dotCmd = subprocess.Popen(['java', '-Xmx512m', '-jar',
-    os.path.join(os.path.split(__file__)[0], 
+    os.path.join(os.path.split(__file__)[0],
                  'batik', 'batik-rasterizer.jar'),
     filename])
   output = dotCmd.communicate()[0]
@@ -210,16 +210,16 @@ def ConvertSvg2Png(filename):
 
 def parse_command_line():
   import optparse
-  
+
   parser = optparse.OptionParser()
   parser.add_option('-p', '--png', action='store_true', dest='png',
                     help='Create a png file as well')
-  parser.add_option('-r', '--rounded', action='store', dest='rounded', 
+  parser.add_option('-r', '--rounded', action='store', dest='rounded',
                     default='(5, 5)')
-  parser.add_option('-s', '--shadow', action='store', dest='shadow', 
+  parser.add_option('-s', '--shadow', action='store', dest='shadow',
                     default='(2, 2)')
   (options, args) = parser.parse_args()
-  
+
   if len(args) == 0:
     import glob
     files = glob.glob('*.dot')
@@ -234,6 +234,7 @@ def parse_command_line():
       new_file = ConvertDot2Svg(arg, options.shadow, options.rounded)
       if options.png:
         ConvertSvg2Png(new_file)
+
 
 if __name__ == '__main__':
   parse_command_line()
