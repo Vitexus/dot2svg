@@ -10,12 +10,12 @@ regfloat = r"[+-]?[0-9]*\.?[0-9]+(?:[Ee][+-]?[0-9]+)?"
 def RemoveWhiteBackground(text):
   """Remove the empty white background that causes some issues with blur."""
 
-  re_white = re.compile(r'<polygon style="fill:white;stroke:white;".*?>\s*')
+  re_white = re.compile(r'<polygon[^>]+style="fill:white;\s*stroke:white;".*?>\s*')
   return re_white.sub('', text)
 
 def FixFont(text):
   """ Replace font-size:14.0 with font-size:12px for example """
-  
+
   re_fontsize = re.compile(r'font-size:([\d\.]+?);')
   args = re_fontsize.search(text)
   if not args:

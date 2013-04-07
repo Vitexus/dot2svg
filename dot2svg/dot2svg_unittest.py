@@ -36,9 +36,15 @@ class FollowUrlTest(unittest.TestCase):
     text = ('<polygon style="fill:white;stroke:white;" '
             'points="54,-36 1.42109e-14,-36 0,-1.42109e-14 54,-0 54,-36"/>')
     self.assertEqual('', dot2svg.RemoveWhiteBackground(text))
+    text = ('<polygon somthing="else" style="fill:white; stroke:white;" '
+            'points="54,-36 1.42109e-14,-36 0,-1.42109e-14 54,-0 54,-36"/>')
+    self.assertEqual('', dot2svg.RemoveWhiteBackground(text))
+    text = ('<polygon \n style="fill:white; stroke:white;" '
+            'points="54,-36 1.42109e-14,-36 0,-1.42109e-14 54,-0 54,-36"/>')
+    self.assertEqual('', dot2svg.RemoveWhiteBackground(text))
 
   def testPolygonToRext(self):
-    text = ('<polygon style="fill:lightgrey;stroke:black;" ' 
+    text = ('<polygon style="fill:lightgrey;stroke:black;" '
             'points="54,-36 1.42109e-14,-36 0,-1.42109e-14 54,-0 54,-36"/>')
 
     result = dot2svg.PolygonToRect(text)
